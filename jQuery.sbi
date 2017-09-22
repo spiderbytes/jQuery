@@ -1,0 +1,145 @@
+﻿DeclareModule jQuery
+  
+  EnableExplicit
+  
+  ; Event
+  
+  Declare BindjQEvent(jqElement, Event.s, Callback)
+  Declare UnbindjQEvent(jqElement, Event.s, Callback)
+  
+  ; 
+  
+  Declare Element(Html.s)
+  Declare Append(jqElement, jqChildElement)
+  Declare Prepend(jqElement, jqChildElement)
+  Declare Remove(jqElement)
+  Declare Empty(jqElement)
+  
+  ; Class
+  
+  Declare AddClass(jqElement, ClassName.s)
+  Declare HasClass(jqElement, ClassName.s)
+  Declare RemoveClass(jqElement, ClassName.s)
+  Declare ToggleClass(jqElement, ClassName.s)
+  
+  ; CSS
+  
+  Declare SetCSS(jqElement, CssName.s, CssValue.s)
+  Declare GetCSS(jqElement, CssName.s)
+  Declare RemoveCSS(jqElement, CssName.s)
+  
+  ; Attribute
+  
+  Declare SetAttribute(jqElement, AttributeName.s, AttributeValue.s)
+  Declare GetAttribute(jqElement, AttributeName.s)
+  Declare RemoveAttribute(jqElement, AttributeName.s)	
+  
+  ; Data
+  
+  Declare SetData(jqElement, Key.s, Value)
+  Declare GetData(jqElement, Key.s)
+  
+  ; ...
+  
+  Declare GetParent(jqElement)
+  
+  Declare SetText(jqElement, Text.s)
+  Declare SetHtml(jqElement, Html.s)
+  
+EndDeclareModule
+
+Module jQuery
+  
+  EnableExplicit
+  
+  Procedure BindjQEvent(jqElement, Event.s, Callback)
+    ! v_jqelement.bind(v_event, function(e) { v_callback(e) });
+  EndProcedure
+  
+  Procedure UnbindjQEvent(jqElement, Event.s, Callback)
+    ! v_jqelement.unbind(v_event, v_callback);
+  EndProcedure
+  
+  ; ------------------
+  
+  Procedure Element(Html.s)
+    ! return $(v_html);
+  EndProcedure
+  
+  Procedure Append(jqElement, jqChildElement)
+    ! $(v_jqelement).append(v_jqchildelement);  
+  EndProcedure
+  
+  Procedure Prepend(jqElement, jqChildElement)
+    ! $(v_jqelement).prepend(v_jqchildelement);  
+  EndProcedure
+  
+  Procedure Remove(jqElement)
+    ! v_jqelement.remove();
+  EndProcedure
+  
+  Procedure Empty(jqElement)
+    ! v_jqelement.empty();
+  EndProcedure
+  
+  Procedure AddClass(jqElement, ClassName.s)
+    ! v_jqelement.addClass(v_classname);
+  EndProcedure
+  
+  Procedure HasClass(jqElement, ClassName.s)
+    ! return v_jqelement.hasClass(v_classname);
+  EndProcedure
+  
+  Procedure RemoveClass(jqElement, ClassName.s)
+    ! v_jqelement.removeClass(v_classname);
+  EndProcedure
+  
+  Procedure ToggleClass(jqElement, ClassName.s)
+    ! v_jqelement.toggleClass(v_classname);
+  EndProcedure
+  
+  Procedure SetCSS(jqElement, CssName.s, CssValue.s)
+    ! v_jqelement.css(v_cssname, v_cssvalue);
+  EndProcedure
+  
+  Procedure GetCSS(jqElement, CssName.s)
+    ! return v_jqelement.css(v_cssname);
+  EndProcedure
+  
+  Procedure RemoveCSS(jqElement, CssName.s)
+    ! v_jqelement.css(v_cssname, "");
+  EndProcedure
+  
+  Procedure SetAttribute(jqElement, AttributeName.s, AttributeValue.s)
+    ! v_jqelement.attr(v_attributename, v_attributevalue);
+  EndProcedure
+  
+  Procedure GetAttribute(jqElement, AttributeName.s)
+    ! return v_jqelement.attr(v_attributename);
+  EndProcedure
+  
+  Procedure RemoveAttribute(jqElement, AttributeName.s)	
+    ! v_jqelement.removeAttr(v_attributename);
+  EndProcedure
+  
+  Procedure SetData(jqElement, Key.s, Value)
+    ! v_jqelement.data(v_key, v_value);
+  EndProcedure
+  
+  Procedure GetData(jqElement, Key.s)
+    ! return v_jqelement.data(v_key);
+  EndProcedure
+  
+  Procedure GetParent(jqElement)
+    ! return v_jqelement.parent();
+  EndProcedure
+  
+  Procedure SetText(jqElement, Text.s)
+    ! $(v_jqelement).text(v_text);  
+  EndProcedure
+  
+  Procedure SetHtml(jqElement, Html.s)
+    ! $(v_jqelement).html(v_html);  
+  EndProcedure
+  
+EndModule
