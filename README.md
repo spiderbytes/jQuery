@@ -1,5 +1,5 @@
 # jQuery
-SpiderBasic-Module to use jQuery (https://jquery.com/)
+SpiderBasic-Module for using jQuery (https://jquery.com/)
 
 # Example:
 
