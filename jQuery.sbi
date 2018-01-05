@@ -2,15 +2,13 @@
   
   EnableExplicit
   
-  ; Event
-  
-  Declare BindjQEvent(jqElement, Event.s, Callback)
-  Declare UnbindjQEvent(jqElement, Event.s, Callback)
-  
-  ; 
-  
   Declare Element(Html.s)
-  Declare Append(jqElement, jqChildElement)
+  
+  Declare ElementByID(ID.s)
+  Declare ElementByClass(Class.s)
+  
+  Declare Append  (jqParentElement, jqChildElement)
+  Declare AppendTo(jqChildElement, jqParentElement)
   Declare Prepend(jqElement, jqChildElement)
   Declare Remove(jqElement)
   Declare Empty(jqElement)
@@ -36,8 +34,10 @@
   
   ; Data
   
-  Declare SetData(jqElement, Key.s, Value)
-  Declare GetData(jqElement, Key.s)
+  Declare   SetData(jqElement, Key.s, Value)
+  Declare   SetStringData(jqElement, Key.s, Value.s)
+  Declare   GetData(jqElement, Key.s)
+  Declare.s GetStringData(jqElement, Key.s)
   
   ; ...
   
@@ -46,28 +46,38 @@
   Declare SetText(jqElement, Text.s)
   Declare SetHtml(jqElement, Html.s)
   
+  ; Events
+  Declare On(jqElement, Event.s, Function)  
+  Declare Off(jqElement, Event.s = "", Function = #PB_Ignore)
+  
+  ; Misc
+  Declare CallByName(jqElement, FunctionName.s)  
+  Declare LoadScript(Script.s, Callback)
+  
 EndDeclareModule
 
 Module jQuery
   
   EnableExplicit
   
-  Procedure BindjQEvent(jqElement, Event.s, Callback)
-    ! v_jqelement.bind(v_event, function(e) { v_callback(e) });
-  EndProcedure
-  
-  Procedure UnbindjQEvent(jqElement, Event.s, Callback)
-    ! v_jqelement.unbind(v_event, v_callback);
-  EndProcedure
-  
-  ; ------------------
-  
   Procedure Element(Html.s)
     ! return $(v_html);
   EndProcedure
   
-  Procedure Append(jqElement, jqChildElement)
-    ! $(v_jqelement).append(v_jqchildelement);  
+  Procedure ElementByID(ID.s)
+    ! return $('#' + v_id);
+  EndProcedure
+  
+  Procedure ElementByClass(Class.s)
+    ! return $('.' + v_class);
+  EndProcedure
+  
+  Procedure Append(jqParentElement, jqChildElement)
+    ! $(v_jqparentelement).append(v_jqchildelement);  
+  EndProcedure
+  
+  Procedure AppendTo(jqChildElement, jqParentElement)
+    ! $(v_jqchildelement).appendTo(v_jqparentelement);  
   EndProcedure
   
   Procedure Prepend(jqElement, jqChildElement)
@@ -126,7 +136,15 @@ Module jQuery
     ! v_jqelement.data(v_key, v_value);
   EndProcedure
   
+  Procedure SetStringData(jqElement, Key.s, Value.s)
+    ! v_jqelement.data(v_key, v_value);
+  EndProcedure
+  
   Procedure GetData(jqElement, Key.s)
+    ! return v_jqelement.data(v_key);
+  EndProcedure
+  
+  Procedure.s GetStringData(jqElement, Key.s)
     ! return v_jqelement.data(v_key);
   EndProcedure
   
@@ -140,6 +158,30 @@ Module jQuery
   
   Procedure SetHtml(jqElement, Html.s)
     ! $(v_jqelement).html(v_html);  
+  EndProcedure
+  
+  Procedure On(jqElement, Event.s, Function)
+    ; .on( events [, selector ] [, data ], handler )
+    ! v_jqelement.on(v_event, v_function);
+  EndProcedure
+  
+  Procedure Off(jqElement, Event.s = "", Function = #PB_Ignore)
+    ; .off( events [, selector ] [, handler ] )
+    If Event <> "" And Function <> #PB_Ignore
+      ! v_jqelement.off(v_event, v_function);
+    ElseIf Event <> "" And Function = #PB_Ignore
+      ! v_jqelement.off(v_event);
+    Else
+      ! v_jqelement.off();
+    EndIf
+  EndProcedure
+  
+  Procedure CallByName(jqElement, FunctionName.s)
+    ! v_jqelement[v_functionname]();
+  EndProcedure
+  
+  Procedure LoadScript(Script.s, Callback)
+    ! $.getScript( v_script, v_callback );
   EndProcedure
   
 EndModule
